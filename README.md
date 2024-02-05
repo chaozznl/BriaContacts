@@ -14,3 +14,4 @@ The script uses a slightly modified version of the CiscoIPPhoneDirectory XML for
 - This version will not let you remove or modify already added contacts.
 - Only tested on Windows 11.
 - User needs to at least log into the Bria client once for the correct folders and files to be created which this script can modify.
+- All contacts added by this script are readonly by design. They can not be changed, but can be deleted by the end-user. Running the script again will restore the deleted contact.
