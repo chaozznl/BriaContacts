@@ -1,0 +1,12 @@
+<CiscoIPPhoneDirectory>
+	<DirectoryEntry>
+		<Name>HR</Name>
+		<Telephone>1234</Telephone>
+		<Favourite>0</Favourite>
+	</DirectoryEntry>
+		<DirectoryEntry>
+		<Name>IT Department</Name>
+		<Telephone>1235</Telephone>
+		<Favourite>1</Favourite>
+	</DirectoryEntry>
+</CiscoIPPhoneDirectory>
