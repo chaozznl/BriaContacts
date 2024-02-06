@@ -33,7 +33,6 @@ def create_connection(db_file):
     return conn
 
 def importxml(conn, url):
-    #url = "https://beheer.sciogroep.nl/bin/contacts.xml"
     response = requests.get(url)
     directorydata = xmltodict.parse(response.content)
     numlen = len(directorydata['CiscoIPPhoneDirectory']['DirectoryEntry'])
