@@ -17,7 +17,7 @@ The script also changes two settings in the **user.config** file:
 
 You can comment this out, or add your own centralized settings.
 
-The script creates a fresh log.txt file that is a log of the scripts actions. Use this to debug any potential issues.
+The script creates a log.txt file that you can use to debug any potential issues.
 
 # XML format
 The script uses a slightly modified version of the *CiscoIPPhoneDirectory XML format*. Check the example in the project folder.
