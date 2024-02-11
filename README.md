@@ -1,4 +1,4 @@
-# Bria Import Contacts
+# Bria Softphone Contacts
 Import global contacts into the Bria Softphone client using *an XML source URL*.
 
 # Usecase
