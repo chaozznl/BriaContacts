@@ -1,5 +1,5 @@
 # Bria Softphone Contacts
-Import global contacts into the Bria Softphone client using *an XML source URL*.
+Import global contacts into the Bria Softphone client using an `XML source URL`.
 
 # Usecase
 Bria Softphone client does not (yet) facilitate the option to automatically import a centralized contact list. This Python script fixes that shortcoming.
@@ -12,15 +12,16 @@ BriaImportContacts.exe [url]
 The Python script will read the contents of an XML file from a URL (parameter) and import it into the contact list of the local Bria user.
 
 The script also changes two settings in the **user.config** file:
-- **ContactPanelShowGroups** is set to *False*
-- **ContactPanelSortByPresence** is set to *False*
+- `ContactPanelShowGroups` is set to `False`
+- `ContactPanelSortByPresence` is set to `False`
+- `LoginRememberDetails` is set to `True`
 
 You can comment this out, or add your own centralized settings.
 
 The script creates a log.txt file that you can use to debug any potential issues.
 
 # XML format
-The script uses a slightly modified version of the *CiscoIPPhoneDirectory XML format*. Check the example in the project folder.
+The script uses a slightly modified version of the `CiscoIPPhoneDirectory XML format`. Check the example in the project folder.
 
 # Limitations
 - This version will not let you remove or modify already added contacts.
