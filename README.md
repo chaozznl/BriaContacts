@@ -6,7 +6,7 @@ Bria Softphone client does not (yet) facilitate the option to automatically impo
 
 # Parameter
 BriaImportContacts.exe [url]   
-*Example: BriaImportContacts.exe https://example.com/folder/contacts.xml*
+Example: `BriaImportContacts.exe https://example.com/folder/contacts.xml`
 
 # How it works
 The Python script will read the contents of an XML file from a URL (parameter) and import it into the contact list of the local Bria user. The contacts file is an `SQL Lite` file which we can freely interact with.
