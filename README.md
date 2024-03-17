@@ -18,7 +18,7 @@ The script also changes two settings in the `user.config` XML file:
 
 You can comment this out, or add your own centralized settings.
 
-The script creates a log file that you can use to debug any potential issues at %temp%\briaimportlog.txt.
+The script creates a log file that you can use to debug any potential issues at `%temp%\briaimportlog.txt`.
 
 # XML format
 The script uses a slightly modified version of the `CiscoIPPhoneDirectory XML format`. Check the example in the project folder.
