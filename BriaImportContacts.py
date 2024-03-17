@@ -5,10 +5,13 @@ import requests
 import os
 import sys
 from sqlite3 import Error
+#from xml.dom import minidom
 from datetime import datetime
 
 # OPEN LOG FILE
-logfile = open("log.txt", "w")
+tempfolder = os.getenv('TEMP')
+logfilename = "{}\\briaimportlog.txt".format(tempfolder)
+logfile = open(logfilename, "w")
     
 # GET CURRENT DATE
 now = datetime.now()
@@ -43,7 +46,7 @@ def importxml(conn, url):
     INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('firstname', 'Kabouter', entity_id, 16, 0, 0)
     INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('lastname', 'Wesley', entity_id, 16, 0, 0)
     INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('name', 'Kabouter Wesley', entity_id, 144, 0, 0)
-    INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('work', '0654321098', entity_id, 1289, 0, 0)
+    INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('work', '0631685559', entity_id, 1289, 0, 0)
     INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('avatar', '', entity_id, 192, 0, 0)
     """
 
@@ -187,6 +190,9 @@ def changesettings(settingsfile):
         
     for setting in root.findall("./userSettings/Kudu.Properties.Settings/setting[@name='ContactPanelSortByPresence']/value"):
         setting.text = "False"
+        
+    for setting in root.findall("./userSettings/Kudu.Properties.Settings/setting[@name='LoginRememberDetails']/value"):
+        setting.text = "True"
 
     tree.write(settingsfile)
     logfile.writelines([date_time, "Settings changed in "+settingsfile,"\n"])
