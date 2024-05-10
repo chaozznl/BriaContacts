@@ -50,6 +50,41 @@ def importxml(conn, url):
     INSERT INTO Field (name, value, entity_id, type, is_default, is_readonly) VALUES ('avatar', '', entity_id, 192, 0, 0)
     """
 
+    # before we import our custom contacts, lets delete our custom contacts from a previous run
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM EntityParents WHERE parent_entity = 1')
+    records = cur.fetchall()
+    count = 0
+    for row in records:
+        parententity_id = int(row[0])
+        # now we have the parententity_id we can delete all records
+        # the order in which we delete the records matters because of FOREIGN KEY restraints
+        # delete records in table fields where is_readonly = 1
+        cur2 = conn.cursor()
+        cur2.execute('DELETE FROM Field WHERE is_readonly = 1')
+        conn.commit()
+        # delete entityparents records part 1
+        sqlquery = "DELETE FROM EntityParents WHERE entity_id = ?"
+        sqlvalues = (parententity_id,)
+        cur2 = conn.cursor()
+        cur2.execute(sqlquery, sqlvalues)
+        conn.commit()
+        # delete entityparents records part 2
+        sqlquery = "DELETE FROM EntityParents WHERE parent_entity = ?"
+        sqlvalues = (parententity_id,)
+        cur2 = conn.cursor()
+        cur2.execute(sqlquery, sqlvalues)
+        conn.commit()
+        # delete records in table Entity where is_readonly = 1
+        cur2 = conn.cursor()
+        cur2.execute('DELETE FROM Entity WHERE is_readonly = 1')
+        conn.commit()
+        count += 1
+        
+    # log action             
+    logfile.writelines([date_time, "Cleared "+str(count)+" old entries\n"])             
+
+
     for x in range(numlen):
         dirdat_name = directorydata['CiscoIPPhoneDirectory']['DirectoryEntry'][x]['Name']
         dirdat_number = directorydata['CiscoIPPhoneDirectory']['DirectoryEntry'][x]['Telephone']
@@ -64,25 +99,26 @@ def importxml(conn, url):
         else:
             dirdat_firstname = dirdat_name
             dirdat_lastname = ''
-            
-        #
-        # FIRST CHECK IF THE ENTITY EXISTS
-        #
-        sqlquery = "SELECT * FROM Field WHERE name = 'work' AND value = ?"
-        sqlvalues = (dirdat_number,)
-        cur = conn.cursor()
-        cur.execute(sqlquery, sqlvalues)
         
-        numrows = len(cur.fetchall()) 
-        conn.commit()
+        """
+        #
+        # FIRST CHECK IF THE ENTITY EXISTS (no longer needed since this version first deletes all old imports)
+        #
+        #sqlquery = "SELECT * FROM Field WHERE name = 'work' AND value = ?"
+        #sqlvalues = (dirdat_number,)
+        #cur = conn.cursor()
+        #cur.execute(sqlquery, sqlvalues)
+        
+        #numrows = len(cur.fetchall()) 
+        #conn.commit()
         
         #
         # IT EXISTS, SO SKIP THIS RECORD
         #
-        if numrows > 0:
-            logfile.writelines([date_time, "Skipped: "+dirdat_name,"\n"])
-            continue
-        
+        #if numrows > 0:
+        #    logfile.writelines([date_time, "Skipped: "+dirdat_name,"\n"])
+        #    continue
+        """"
         logfile.writelines([date_time, "Added: "+dirdat_name,"\n"])
         
         #
