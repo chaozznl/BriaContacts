@@ -104,21 +104,21 @@ def importxml(conn, url):
         #
         # FIRST CHECK IF THE ENTITY EXISTS (no longer needed since this version first deletes all old imports)
         #
-        #sqlquery = "SELECT * FROM Field WHERE name = 'work' AND value = ?"
-        #sqlvalues = (dirdat_number,)
-        #cur = conn.cursor()
-        #cur.execute(sqlquery, sqlvalues)
+        sqlquery = "SELECT * FROM Field WHERE name = 'work' AND value = ?"
+        sqlvalues = (dirdat_number,)
+        cur = conn.cursor()
+        cur.execute(sqlquery, sqlvalues)
         
-        #numrows = len(cur.fetchall()) 
-        #conn.commit()
+        numrows = len(cur.fetchall()) 
+        conn.commit()
         
         #
         # IT EXISTS, SO SKIP THIS RECORD
         #
-        #if numrows > 0:
-        #    logfile.writelines([date_time, "Skipped: "+dirdat_name,"\n"])
-        #    continue
-        """"
+        if numrows > 0:
+            logfile.writelines([date_time, "Skipped: "+dirdat_name,"\n"])
+            continue
+        """
         logfile.writelines([date_time, "Added: "+dirdat_name,"\n"])
         
         #
